@@ -1,0 +1,7 @@
+require_relative './artist'
+require_relative './album'
+require_relative './track'
+require_relative './scrobble_track'
+require_relative './scrobble'
+require_relative './user'
+require_relative './session'
