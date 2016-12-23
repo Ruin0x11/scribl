@@ -1,2 +1,4 @@
-require './app'
+require "rubygems"
+require "./app.rb"
+
 run Scribl

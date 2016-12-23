@@ -6,8 +6,5 @@ end
 def user_from_session(session)
   Session.where("expires < ?", Time.now.to_i).destroy_all
 
-  res = Session.where(sessionid: session).first.id
-
-  return "BADSESSION\n" if !res
-  res
+  return Session.find_by(sessionid: session)
 end

@@ -2,19 +2,15 @@ require 'sinatra'
 require 'digest/md5'
 
 require_relative 'util'
-require_relative 'models/user'
-require_relative 'models/session'
+require_relative '../models/user'
+require_relative '../models/session'
 
 class Scribl < Sinatra::Base
   SUPPORTED_PROTOCOLS = ['1.2', '1.2.1']
 
-  post '/asd' do
-    "dood"
-  end
-
-  post '/handshake' do
+  get '/' do
     if !['p','u','t','a','c'].all? { |s| params.key?(s) }
-      halt "BADAUTH Required fields not included\n"
+      halt 400, "BADAUTH Required fields not included\n"
     end
 
     protocol = params['p']
@@ -24,18 +20,18 @@ class Scribl < Sinatra::Base
     client = params['c']
 
     if !SUPPORTED_PROTOCOLS.include?(protocol)
-      halt "FAILED Unsupported protocol version\n"
+      halt 400, "FAILED Unsupported protocol version\n"
     end
 
     if timestamp - Time.now.to_i > 300
-      halt "BADAUTH Timestamp in the future\n"
+      halt 400, "BADAUTH Timestamp in the future\n"
     end
 
     p timestamp
     is_authorized = check_auth(username, auth_token, timestamp)
 
     if !is_authorized
-      halt "BADAUTH Not authorized\n"
+      halt 400, "BADAUTH Not authorized\n"
     end
 
     user_id = User.where(name: username).first.id
@@ -43,6 +39,11 @@ class Scribl < Sinatra::Base
 
     Session.create(id: user_id.to_s, sessionid: session_id, client: client, expires: Time.now.to_i + 24.hours.to_i)
 
-    "OK\n#{session_id}\nexample.com/nowplaying/1.2\nexample.com/submissions/1.2\n"
+    server = request.host_with_port
+    "OK\n#{session_id}\n#{server}/nowplaying\n#{server}/submit\n"
+  end
+
+  post "/nowplaying" do
+    "OK\n"
   end
 end

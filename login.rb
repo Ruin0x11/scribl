@@ -2,12 +2,17 @@ require 'digest/md5'
 require 'net/http'
 require 'uri'
 
-uri = URI.parse("http://localhost:4567/handshake")
-
 ts = Time.now.to_i.to_s
 password = "dood"
 token = Digest::MD5.hexdigest(Digest::MD5.hexdigest(password) + ts)
-res = Net::HTTP.post_form(uri, {"p" => "1.2", "u" => "ruin", "t" => ts, "a" => token, "c" => "test"})
+params = {"p" => "1.2", "u" => "ruin", "t" => ts, "a" => token, "c" => "test"}
+
+uri = URI('http://localhost:4567/')
+uri.query = URI.encode_www_form(params)
+res = Net::HTTP.get_response(uri)
+puts res.body
+
+sleep 1
 
 session = res.body.split("\n")[1]
 

@@ -34,7 +34,6 @@ class Initialize < ActiveRecord::Migration[5.0]
       t.string :artist, references: :artist
       t.string :album
       t.string :name
-      t.integer :track
       t.datetime :time
       t.integer :length
       t.integer :scrobble_track_id
@@ -49,7 +48,5 @@ class Initialize < ActiveRecord::Migration[5.0]
     end
 
     add_foreign_key :sessions, :users
-
-    create_user_with_password("ruin", "dood")
   end
 end

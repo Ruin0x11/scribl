@@ -1,7 +1,23 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'sinatra'
-gem 'sinatra-activerecord'
-gem 'sqlite3'
-gem 'haml'
 gem 'rake'
+gem 'sinatra'
+gem 'haml'
+gem 'activerecord'
+gem 'sinatra-activerecord'
+gem "sinatra-reloader"
+
+gem 'sqlite3-ruby'
+gem 'mysql2'
+gem 'i18n'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'rspec-core'
+  gem 'autotest'
+  gem 'autotest-growl'
+  gem "simplecov", ">=0.4.2"
+  gem "timecop"
+end

@@ -1,5 +1,5 @@
 require 'digest/md5'
-require_relative 'models/user'
+require_relative '../models/user'
 
 def check_auth(username, token, timestamp)
   hash = User.where(name: username).first.password
