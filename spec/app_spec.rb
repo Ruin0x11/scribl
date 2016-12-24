@@ -91,9 +91,15 @@ describe "App" do
 
     it "should fail on expired session" do
       Timecop.freeze(Date.today + 2) do
-        post "/submit", @params
+        post "/submit", @submit_params
         expect(last_response.status).to eq(400)
       end
+    end
+
+    it "should succeed on good parameters" do
+      post "/submit", @submit_params
+      byebug
+      expect(last_response.status).to eq(200)
     end
   end
 end
