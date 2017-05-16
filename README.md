@@ -1,5 +1,5 @@
 # scribl
-just a personal scrobbling server.
+A personal scrobbling server for tracking music listening habits.
 
 ## Usage
 ```
