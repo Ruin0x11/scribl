@@ -7,8 +7,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem "sinatra-reloader"
 
-gem 'sqlite3-ruby'
-gem 'mysql2'
+gem 'pg'
 gem 'i18n'
 
 group :development, :test do

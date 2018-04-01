@@ -19,12 +19,10 @@ class Scribl < Sinatra::Base
 
   configure :development do
     register Sinatra::Reloader
-    set :database, {adapter: "sqlite3", database: "scribl.dev.sqlite3"}
     enable :logging, :dump_errors, :raise_errors
   end
 
   configure :production do
-    set :database, {adapter: "sqlite3", database: "scribl.sqlite3"}
     set :raise_errors, false
     set :show_exceptions, false
   end

@@ -29,24 +29,5 @@ class Initialize < ActiveRecord::Migration[5.0]
       t.string :album
       t.integer :track
     end
-
-    create_table :scrobbles do |t|
-      t.string :artist, references: :artist
-      t.string :album
-      t.string :name
-      t.datetime :time
-      t.integer :length
-      t.integer :scrobble_track_id
-      t.integer :user_id
-    end
-
-    create_table :sessions, id: false, primary_key: :id do |t|
-      t.string :id
-      t.string :client, limit: 3
-      t.string :sessionid, limit: 32
-      t.datetime :expires
-    end
-
-    add_foreign_key :sessions, :users
   end
 end

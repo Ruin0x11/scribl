@@ -1,16 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: 
+  pool: 5
+
 development:
-  adapter: sqlite3
-  encoding: utf8
-  database: db/development.db
+  <<: *default
+  database: scribl_development
 
 test:
-  adapter: sqlite3
-  encoding: utf8
-  database: db/test.db
+  <<: *default
+  database: scribl_test
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  username: root
-  password:
-  database: sinatra-template
+  <<: *default
+  database: scribl_production
