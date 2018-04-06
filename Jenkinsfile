@@ -5,8 +5,7 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("localhost:5000/scribl:${env.BUILD_NUMBER}")
-        app.tag("localhost:5000/scribl:latest")
+        app = docker.build("scribl:${env.BUILD_NUMBER}")
     }
 
     stage('Test image') {
@@ -15,10 +14,10 @@ node {
         }
     }
 
-    //  stage('Push image') {
-    //      docker.withRegistry("localhost:5000") {
-    //          app.push("${env.BUILD_NUMBER}")
-    //          app.push("latest")
-    //      }
-    //  }
+    stage('Push image') {
+        docker.withRegistry("localhost:5000") {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
 }
