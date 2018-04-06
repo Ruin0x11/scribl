@@ -1,11 +1,12 @@
 node {
     def app
-        stage('Clone repository') {
-            checkout scm
-        }
+    stage('Clone repository') {
+        checkout scm
+    }
 
     stage('Build image') {
         app = docker.build("localhost:5000/scribl:${env.BUILD_NUMBER}")
+        app.tag("localhost:5000/scribl:latest")
     }
 
     stage('Test image') {
