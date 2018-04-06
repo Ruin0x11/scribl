@@ -5,9 +5,7 @@ node {
         }
 
     stage('Build image') {
-        docker.withRegistry("localhost:5000") {
-            app = docker.build("scribl:${env.BUILD_NUMBER}")
-        }
+        app = docker.build("localhost:5000/scribl:${env.BUILD_NUMBER}")
     }
 
     stage('Test image') {
